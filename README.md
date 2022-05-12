@@ -2,8 +2,8 @@
 PowerShell module for backup DevOps repos.
 
 
-$PAT = "<Personal Access Token>"
-$OrganizationName = "<OrgName>"
+$PAT = "Personal Access Token"
+$OrganizationName = "OrgName"
 
 Backup-Repository -PAT $PAT -OrganizationName $OrganizationName -OutputPath C:\Backup\AzureDevOps
 Backup-Pipeline -PAT $PAT -OrganizationName $OrganizationName -OutputPath C:\Backup\AzureDevOps
