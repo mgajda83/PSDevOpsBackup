@@ -1,13 +1,13 @@
 Function Backup-Repository
 {
-	[CmdletBinding(DefaultParameterSetName="Token")]
+	[CmdletBinding(DefaultParameterSetName="AccessToken")]
 	param (
 		# Personal Access Token with DevOps Access
 		[Parameter(ParameterSetName="PAT",Mandatory=$true)]
 		[String]$PAT,
-		# Token with with DevOps Access
-		[Parameter(ParameterSetName="Token",Mandatory=$true)]
-		[String]$Token,
+		# AccessToken with with DevOps Access
+		[Parameter(ParameterSetName="AccessToken",Mandatory=$true)]
+		[String]$AccessToken,
 		# Azure DevOps organization name
 		[Parameter(Mandatory=$true)]
 		[String]$OrganizationName,
@@ -25,12 +25,12 @@ Function Backup-Repository
 		[String[]]$RepositoryIds
 	)
 
-	$Header = @{
+	$Header = [Ordered]@{
 		"Content-Type" = "application/json"
 		"Accept" = "application/json"
 	}
 	if($PAT) { $Header["Authorization"] = "Basic " + [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(":$($PAT)")) }
-	if($Token) { $Header["Authorization"] = "Bearer " + $($Token.AccessToken) }
+	if($AccessToken) { $Header["Authorization"] = "Bearer " + $AccessToken }
 
 	#Get Projects
 	$UriBase = "https://dev.azure.com/$($OrganizationName)/"
